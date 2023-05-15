@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "fast-api-msr"
+version = "0.1.0"
+description = ""
+authors = ["marcos <jmarcosuarez@gmail.com>"]
+readme = "README.md"
+packages = [{include = "fast_api_msr"}]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+uvicorn = "^0.22.0"
+fastapi = "^0.95.1"
+pydantic = "^1.10.7"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
