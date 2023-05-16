@@ -2,6 +2,8 @@ from typing import Optional, List
 from fastapi import FastAPI, Path, Query
 from pydantic import BaseModel
 
+from api import users, courses, sections
+
 description = """
 fast-api API tutorial. 🚀
 
@@ -32,29 +34,7 @@ app = FastAPI(
     },
 )
 
-users = []
 
-
-class User(BaseModel):
-    email: str
-    is_active: bool
-    bio: Optional[str]
-
-
-@app.get("/users", response_model=List[User])
-async def get_users():
-    return users
-
-
-@app.post("/users")
-async def create_user(user: User):
-    users.append(user)
-    return "Success"
-
-
-@app.get("/users/{id}")
-async def get_user(
-    id: int = Path(..., description="The id of the user ...", gt=2),
-    q: str = Query(None, max_length=5),
-):
-    return {"user": users[id], "query": q}
+app.include_router(users.router)
+app.include_router(courses.router)
+app.include_router(sections.router)
